@@ -5,7 +5,7 @@
 //  --slackkey="slack bot key"
 //
 
-'use strict';
+//'use strict';
 
 const Botkit = require('botkit');
 
