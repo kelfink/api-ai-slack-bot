@@ -9,9 +9,11 @@
 
 const Botkit = require('botkit');
 
+
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const argv = require('minimist')(process.argv.slice(2));
+const utils = require('./utils.js');
 
 const Entities = require('html-entities').XmlEntities;
 const decoder = new Entities();
@@ -59,6 +61,34 @@ var pg = require('pg');
 	});
 });
   
+function replyUserName(userMap, message) {
+  bot.reply(message,'Oh, you are actually ' + userMap[message.user]);
+}
+
+controller.hears(['realname'],'direct_message,direct_mention,mention',function(bot, message) {
+		bot.reply(message,'Your id is "' + message.user + '"');
+        utils.usersList( function(userMap) {
+             bot.reply(message, 'Oh, you are actually ' + userMap[message.user].name);
+           }
+        );
+        //console.log("userMap length " + userMap.length());
+
+		//bot.reply(message,'Slackbot is:' + userMap['USLACKBOT']);
+		//bot.reply(message,'Oh, you are actually ' + userMap[message.user]);
+});
+
+controller.hears(['userlist'],'direct_message,direct_mention,mention',function(bot, message) {
+        utils.usersList( function(userMap) {
+			var userString = "";
+		    Object.keys(userMap).forEach(function(key) {
+				userString += userMap[key].name + ',' ;
+			});
+			console.log("Got a response: ", userString);
+			bot.reply(message,'users: ' + userString);
+          }
+        )}
+);
+
 controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambient'], function (bot, message) {
 
     console.log(message.text);
@@ -99,11 +129,30 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                 if (isDefined(response.result)) {
                     var responseText = response.result.fulfillment.speech;
                     var action = response.result.action;
+                    var params = response.result.parameters;
 
                     if (isDefined(responseText)) {
                         bot.reply(message, responseText);
                     }
-
+                     else {
+                       if (isDefined(action)) {
+                            switch (action) {
+								case "create_resource":
+                                  bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
+                                  break;
+								case "checkout_resource":
+                                  bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
+                                  break;
+								case "checkint_resource":
+                                  bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
+                                  break;
+                                case "input_unknown":
+                                  bot.reply(message, "I don't know what that is");
+                                default :
+                                  bot.reply(message, "unhandled action " + action);
+                            }
+                          }
+                       }
                 }
             });
 
