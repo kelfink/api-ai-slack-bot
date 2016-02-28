@@ -21,9 +21,9 @@ var infoResource = function (bot, message, params) {
 				    } else {
 				        bot.reply(message, "Resource " + params.resource_name + " is locked by " + result.rows[0].checkedout_to_id);
 				    }
-				}
-				}
-				});	
+				  }
+				};
+		});
 	  );
 	};
 }
