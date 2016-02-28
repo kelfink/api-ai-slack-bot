@@ -3,6 +3,8 @@
 // ============================
 
 var lockResource = function (bot, message, params) {
+	const utils = require('./utils.js');
+
 	var pg = require('pg');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 			client.query("UPDATE resources set checkedout_to_id = $2 where checkedout_to_id IS NULL AND name = $1", [params.resource_name, message.user], function(err, result) {
