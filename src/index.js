@@ -27,6 +27,12 @@ const controller = Botkit.slackbot({
     //include "log: false" to disable logging
 });
 
+controller.setupWebserver(port, (err) => {
+  if (err) {console.error(err); }
+  console.log('Hey d00d, webserver is on port ${port}...');
+});
+
+
 var bot = controller.spawn({
     token: argv.slackkey
 }).startRTM();
