@@ -17,6 +17,7 @@ const utils = require('./utils.js');
 
 const libCreateResource = require('./liberryCreateResource.js');
 const libLockResource = require('./liberryLockResource.js');
+const libUnlockResource = require('./liberryUnlockResource.js');
 
 const Entities = require('html-entities').XmlEntities;
 const decoder = new Entities();
@@ -145,7 +146,7 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
 								  libLockResource.lockResource (bot, message, params);
                                   break;
 								case "checkin_resource":
-                                  bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
+								  libUnlockResource.unlockResource (bot, message, params);
                                   break;
                                 case "input_unknown":
                                   bot.reply(message, "I don't know what that is");
