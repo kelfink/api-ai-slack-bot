@@ -13,7 +13,7 @@
 var lockResource = function (bot, message, params) {
 	var pg = require('pg');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-			client.query('UPDATE resources set checkedout_to_id = 'stub'  where checkedout_to_id IS NULL AND name = $1', [params.resource_name], function(err, result) {
+			client.query("UPDATE resources set checkedout_to_id = $2 where checkedout_to_id IS NULL AND name = $1", [params.resource_name, message.user], function(err, result) {
 				done();
 				if (err) {
 				console.error(err);
