@@ -51,11 +51,7 @@ In the background mode, you can control the bot’s state via simple commands:
 
 If you want to customize your bot behavior, follow the steps below.
 
-1. Clone the repository https://github.com/xVir/api-ai-slack-bot 
-
-2. Change the code to `index.js`
-
-3. In the Docker, use the `run` command specifying the full path to the directory containing the `index.js` file:
+1. Clone the repository https://github.com/kelfink/liberry.git
 
 ```sh
 On Heroku, setup up these environment variables in your configuration
