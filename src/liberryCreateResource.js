@@ -20,22 +20,21 @@ var createResource = function (bot, message, params) {
 			return;
 		  } else {
 			  if (result.rows.length == 0) {
-				client.query('INSERT INTO resources (name) VALUES ($1)', [params.resource_name], function(err, result) {
-				  done();
-				  if (err) {
-					console.error(err);
-					return;
-				  } else {
-					bot.reply(message, 'Created resource ' + params.resource_name);
-				  }
-				  
+			  	client.query('INSERT INTO resources (name) VALUES ($1)', [params.resource_name], function(err, result) {
+					done();
+					if (err) {
+						console.error(err);
+						return;
+					} else {
+						bot.reply(message, 'Created resource ' + params.resource_name);
+					}
+				});	
 			  } else {
 				bot.reply(message, 'Resource ' + params.resource_name + ' already exists!');
 			  }
 		  }
 		});
 	});
-
 }
 
 module.exports = {
