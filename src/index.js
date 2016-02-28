@@ -16,6 +16,7 @@ const argv = require('minimist')(process.argv.slice(2));
 const utils = require('./utils.js');
 
 const libCreateResource = require('./liberryCreateResource.js');
+const libLockResource = require('./liberryLockResource.js');
 
 const Entities = require('html-entities').XmlEntities;
 const decoder = new Entities();
@@ -141,7 +142,7 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
 								  libCreateResource.createResource (bot, message, params);
                                   break;
 								case "checkout_resource":
-                                  bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
+								  libLockResource.lockResource (bot, message, params);
                                   break;
 								case "checkin_resource":
                                   bot.reply(message, "meh-handled action " + action + " and create " + params.toString());

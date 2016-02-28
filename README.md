@@ -2,60 +2,49 @@
 
 ## Overview
 
+Liberry is Team Resource management in a friendly slack
+
+Liberry is a slack-native chatbot built to understand your team's available shared resources and to to enable
+a friendly interface to help track down what's available at work, among friends, club members or neighbors.
+
+As a librarian, our robot can understand a variety of commands (thanks to API.ai) to allow you to register a sharable
+resource, check it out,  check on the status, or return it for others to use.
+
+At wok, someone might bring in a book for others to borrow.   Liberry can help you out:
+
+Bert>  @liberry:  create resource "The Thing Explainer"
+liberry> Ok, "The Thing Explainer is available to check out"
+
+Ernie> @liberry: borrow "The Thing Explainer"
+liberry>  @Ernie:  It's yours
+
+Bert> @liberry:  Who has The Thing explainer?
+@liberry>  @Ernie checked out The Thing Explainer 2 minutes ago
+
+Bert>  @liberry: checkout QA
+@liberry>  Ok.  @Bert is using QA
+
+
+API.ai is a great tool for building a dialog system like this.  It let us map the casual language we use around the office
+ into formal commands our robot can understand.
+ 
+Bert>  @liberry how can you help me?
+@liberry:   I have four primary commands... the CRUD of lending.  
+    Create a sharable resource,
+    Read the state of the resoure or resources
+    Update  (Checkout, return) an item
+    Delete  ( take your resoure out of the borrowing pool)
+    
+    
+
 Api.ai Slack integration allows you to create Slack bots with natural language understanding based on Api.ai technology.
 
-Source code location: https://github.com/xVir/api-ai-slack-bot
+We forked his from https://github.com/xVir/api-ai-slack-bot
 
-Docker image location: https://hub.docker.com/r/xvir/api-ai-slack-bot/
-
-To launch a bot, you’ll need the Linux OS. To launch it in other operating systems, use [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
-
-Api.ai documentation:
-
-- [How to create an Api.ai agent](https://docs.api.ai/docs/get-started#step-1-create-agent)
-- [How to obtain Api.ai authentication keys](https://docs.api.ai/docs/authentication)
-
-You’ll need 3 keys:
-
-- client access token for Api.ai
-- subscription key for Api.ai
-- Slack bot API token
-
-To obtain a Slack bot API token, create a new bot integration here: https://slack.com/apps/A0F7YS25R-bots.
-
-## Bot Launch
-
-To launch the bot, use one of the following commands:
-
-**For background launch mode (-d parameter):**
-
-```sh
-docker run -d --name slack_bot \
-           -e accesskey="api.ai access key" \
-           -e subscriptionkey="api.ai subscription key" \
-           -e slackkey="slack bot key" \
-           xvir/api-ai-slack-bot
-```
-
-**For interactive launch mode (-it parameter):**
-
-```sh
-docker run -it --name slack_bot \
-           -e accesskey="api.ai access key" \
-           -e subscriptionkey="api.ai subscription key" \
-           -e slackkey="slack bot key" \
-           xvir/api-ai-slack-bot
-```
 
 To stop the bot from running in the interactive mode, press CTRL+C.
 
 In the background mode, you can control the bot’s state via simple commands:
-
-
-- `docker start slack_bot`
-- `docker stop slack_bot`,
-
-where `slack_bot` is the container name from the `run` command.
 
 ## Custom Bot Launch
 
@@ -68,60 +57,7 @@ If you want to customize your bot behavior, follow the steps below.
 3. In the Docker, use the `run` command specifying the full path to the directory containing the `index.js` file:
 
 ```sh
-docker run -d --name slack_bot \
-           -e accesskey="api.ai access key" \
-           -e subscriptionkey="api.ai subscription key" \
-           -e slackkey="slack bot key" \
-           -v /full/path/to/your/src:/usr/app/src \
-           xvir/api-ai-slack-bot
-```
+On Heroku, setup up these environment variables in your configuration
 
-## Code Notes
+To run locally, do the same, and run 'sh ./startup.sh' to start the server.
 
-Bot implementation is based on the Slack Botkit: https://github.com/howdyai/botkit.
-
-Message processing is done by the following code:
-
-```javascript
-controller.hears(['.*'],['direct_message','direct_mention','mention', 'ambient'], function(bot,message) {
-    console.log(message.text);
-    if (message.type == "message") {
-        if (message.user == bot.identity.id) {
-            // message from bot can be skipped
-        }
-        else {
-            var requestText = message.text;
-            var channel = message.channel;
-            if (!(channel in sessionIds)) {
-                sessionIds[channel] = uuid.v1();
-            }
-            var request = apiAiService.textRequest(requestText, { sessionId: sessionIds[channel] });
-            request.on('response', function (response) {
-                console.log(response);
-                if (response.result) {
-                    var responseText = response.result.fulfillment.speech;
-                    if (responseText) {
-                        bot.reply(message, responseText);
-                    }
-                }
-            });
-            request.on('error', function (error) {
-                console.log(error);
-            });
-            request.end();
-        }
-    }
-});
-```
-
-This code extracts the text from each message:
-
-`var requestText = message.text;`
-
-And sends it to Api.ai:
-
-`var request = apiAiService.textRequest(requestText, { sessionId: sessionIds[channel] });`
-
-If a non-empty response is received from Api.ai, the bot will respond with the received text:
-
-`bot.reply(message, responseText);`
