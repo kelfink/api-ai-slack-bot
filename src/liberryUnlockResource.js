@@ -24,8 +24,8 @@ var unlockResource = function (bot, message, params) {
 					      bot.reply(message, "I couldn't find resource " + params.resource_name);
 					     return;
 			            } else {
-                          if (message.user !== '') {
-				            bot.reply(message, "You don't have Resource " + params.resource_name + " checked out.  Looks like " + result.rows[0].checkedout_to_id + " has it");
+                          if (message.user === nulL) {
+				            bot.reply(message, "You don't have Resource " + params.resource_name + " checked out.  Looks like it is available");
                           } else {
 				            bot.reply(message, "Resource " + params.resource_name + " is already locked by " + result.rows[0].checkedout_to_id);
                           }
@@ -33,7 +33,7 @@ var unlockResource = function (bot, message, params) {
 					  }
 					});	
 				  } else {
-					bot.reply(message, "Resource " + params.resource_name + " is checked out to you, " + message.user );
+					bot.reply(message, "Resource " + params.resource_name + " is checked in now.  Thank you, good citizen" );
 				  }
 				}
               }

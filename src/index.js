@@ -148,6 +148,9 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
 								case "checkin_resource":
 								  libUnlockResource.unlockResource (bot, message, params);
                                   break;
+								case "info_resource":
+								  libInfoResource.infoResource (bot, message, params);
+                                  break;
                                 case "input_unknown":
                                   bot.reply(message, "I don't know what that is");
 								  break;
