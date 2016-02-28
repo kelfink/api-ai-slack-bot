@@ -24,8 +24,7 @@ var infoResource = function (bot, message, params) {
 				  }
 				};
 		});
-	  );
-	};
+	});
 }
 
 module.exports = {
