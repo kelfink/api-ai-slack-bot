@@ -13,7 +13,7 @@
 var createResource = function (bot, message, params) {
 	var pg = require('pg');
 	 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-		client.query('SELECT * FROM resources where name = $1', [params.resource_name], function(err, result) {
+		client.query('SELECT * FROM resources where upper (name) = $1', [params.resource_name.toUpperCase()], function(err, result) {
 		  done();
 		  if (err) {
 			console.error(err);
