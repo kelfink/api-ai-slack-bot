@@ -2,7 +2,8 @@
 
 ## Overview
 
-Liberry is Team Resource management in a friendly slack
+Liberry club is Team Resource management in a Slack-friendly Bot format.
+Using API.ai's natural language processor, you can ask Liberry to create and manage the status of the physical objects in your environment.
 
 Liberry is a slack-native chatbot built to understand your team's available shared resources and to to enable
 a friendly interface to help track down what's available at work, among friends, club members or neighbors.
