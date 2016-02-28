@@ -18,6 +18,7 @@ const utils = require('./utils.js');
 const libCreateResource = require('./liberryCreateResource.js');
 const libLockResource = require('./liberryLockResource.js');
 const libUnlockResource = require('./liberryUnlockResource.js');
+const libInfoResource = require('./liberryInfoResource.js');
 
 const Entities = require('html-entities').XmlEntities;
 const decoder = new Entities();
