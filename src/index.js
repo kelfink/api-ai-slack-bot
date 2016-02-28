@@ -9,16 +9,18 @@
 
 const Botkit = require('botkit');
 
-const apiai = require('apiai');
+//const apiai = require('apiai');
 const uuid = require('node-uuid');
 const argv = require('minimist')(process.argv.slice(2));
 
 const Entities = require('html-entities').XmlEntities;
 const decoder = new Entities();
 
-const apiAiService = apiai(argv.accesskey, argv.subscriptionkey);
+//const apiAiService = apiai(argv.accesskey, argv.subscriptionkey);
 
 var sessionIds = {};
+
+const port = process.env.PORT || 3000;
 
 const controller = Botkit.slackbot({
     debug: false
