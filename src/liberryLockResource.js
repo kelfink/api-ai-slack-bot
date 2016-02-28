@@ -1,16 +1,10 @@
 // ============================
 // Lock  Resource for liberry
 // ============================
-// var parseUsers = function(jsonBody) {
-    // var users = {};
-	// var userlistResponse = JSON.parse(jsonBody);
-	// userlistResponse.members.forEach(function(member) {
-	  // users[member.id] = member;
-	// });
-    // return users;
-//}
 
 var lockResource = function (bot, message, params) {
+	const utils = require('./utils.js');
+
 	var pg = require('pg');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 			client.query("UPDATE resources set checkedout_to_id = $2 where checkedout_to_id IS NULL AND name = $1", [params.resource_name, message.user], function(err, result) {
@@ -38,10 +32,16 @@ var lockResource = function (bot, message, params) {
 				            bot.reply(message, "Resource " + params.resource_name + " is already locked by " + result.rows[0].checkedout_to_id);
                           }
 			            }
+					        utils.usersList( function(userMap) {
+								bot.reply(message, "Resource " + params.resource_name + " is already checked out by " + userMap[result.rows[0].checkedout_to_id].name);
+							});
+						}
 					  }
 					});	
 				  } else {
-					bot.reply(message, "Resource " + params.resource_name + " is checked out to you, " + message.user );
+					utils.usersList( function(userMap) {
+						bot.reply(message, "Resource " + params.resource_name + " is now checked out to you, " + userMap[message.user].name);
+					});
 				  }
 				}
               }
