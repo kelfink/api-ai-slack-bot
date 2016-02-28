@@ -29,17 +29,17 @@ var lockResource = function (bot, message, params) {
 					return;
 					} else {
 					if (result.rows.length == 0) {
-					bot.reply(message, 'I couldn't find resource ' + params.resource_name);
+					bot.reply(message, "I couldn't find resource " + params.resource_name);
 					return;
 					}
 					}
 					});	
 				} else {
-					bot.reply(message, 'Resource ' + params.resource_name + ' is checkout out  to you');
+					bot.reply(message, "Resource " + params.resource_name + " is checkout out  to you");
 				}
 				});
 			} else {
-				bot.reply(message, 'Resource ' + params.resource_name + ' is locked!!');
+				bot.reply(message, "Resource " + params.resource_name + " is locked!!");
 			}
 	});
 }
