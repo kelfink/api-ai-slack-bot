@@ -20,7 +20,7 @@ var lockResource = function (bot, message, params) {
 				    return;
 				} else {
 				  // Check to see if we updated
-				  if (result.rows.length == 0) {
+				  if (result.rowCount == 0) {
 				    client.query('SELECT * FROM resources where name = $1', [params.resource_name], function(err, result) {
 					  done();
 					  if (err) {
@@ -28,7 +28,7 @@ var lockResource = function (bot, message, params) {
 					    console.error(err);
 					    return;
 					  } else {
-					    if (result.rows.length == 0) {
+					    if (result.row.length == 0) {
 					      bot.reply(message, "I couldn't find resource " + params.resource_name);
 					     return;
 			            } else {
@@ -37,7 +37,7 @@ var lockResource = function (bot, message, params) {
 					  }
 					});	
 				  } else {
-					bot.reply(message, "Resource " + params.resource_name + " is checkout out  to you");
+					bot.reply(message, "Resource " + params.resource_name + " is checked out to you, " + message.user );
 				  }
 				}
               }
