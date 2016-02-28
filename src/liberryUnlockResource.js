@@ -42,5 +42,5 @@ var unlockResource = function (bot, message, params) {
 }
 
 module.exports = {
-  lockResource: lockResource
+  unlockResource: unlockResource
 }
