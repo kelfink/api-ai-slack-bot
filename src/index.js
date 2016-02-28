@@ -15,6 +15,8 @@ const uuid = require('node-uuid');
 const argv = require('minimist')(process.argv.slice(2));
 const utils = require('./utils.js');
 
+const libCreateReasource = require('./liberryCreateResource.js');
+
 const Entities = require('html-entities').XmlEntities;
 const decoder = new Entities();
 
@@ -138,12 +140,12 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                        if (isDefined(action)) {
                             switch (action) {
 								case "create_resource":
-                                  bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
+								  libCreateReasource.CreateResource (params);
                                   break;
 								case "checkout_resource":
                                   bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
                                   break;
-								case "checkint_resource":
+								case "checkin_resource":
                                   bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
                                   break;
                                 case "input_unknown":
