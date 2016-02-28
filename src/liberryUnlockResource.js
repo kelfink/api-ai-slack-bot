@@ -32,12 +32,14 @@ var unlockResource = function (bot, message, params) {
 							utils.usersList( function(userMap) {
 								bot.reply(message, "Resource " + params.resource_name + " is already checked out by " + userMap[result.rows[0].checkedout_to_id].name);
 							});
+							return;
                           }
 			            }
 					  }
 					});	
 				  } else {
 					bot.reply(message, "Resource " + params.resource_name + " is checked in now.  Thank you, good citizen" );
+					return;
 				  }
 				}
               }
