@@ -1,8 +1,9 @@
-﻿# Api.ai Slack Integration - Now with Meat!
+﻿# Liberry.club -- resource sharing made friendly
 
 ## Overview
 
-Liberry is Team Resource management in a friendly slack
+Liberry club is Team Resource management in a Slack-friendly Bot format.
+Using API.ai's natural language processor, you can ask Liberry to create and manage the status of the physical objects in your environment.
 
 Liberry is a slack-native chatbot built to understand your team's available shared resources and to to enable
 a friendly interface to help track down what's available at work, among friends, club members or neighbors.
@@ -50,11 +51,7 @@ In the background mode, you can control the bot’s state via simple commands:
 
 If you want to customize your bot behavior, follow the steps below.
 
-1. Clone the repository https://github.com/xVir/api-ai-slack-bot 
-
-2. Change the code to `index.js`
-
-3. In the Docker, use the `run` command specifying the full path to the directory containing the `index.js` file:
+1. Clone the repository https://github.com/kelfink/liberry.git
 
 ```sh
 On Heroku, setup up these environment variables in your configuration
