@@ -25,7 +25,7 @@ var unlockResource = function (bot, message, params) {
 					     return;
 			            } else {
                           if (message.user !== '') {
-				            bot.reply(message, "You don't have Resource " + params.resource_name + " checked out.  Looks like " + result.rows[0].checkedout_to_id + " has it);
+				            bot.reply(message, "You don't have Resource " + params.resource_name + " checked out.  Looks like " + result.rows[0].checkedout_to_id + " has it");
                           } else {
 				            bot.reply(message, "Resource " + params.resource_name + " is already locked by " + result.rows[0].checkedout_to_id);
                           }
