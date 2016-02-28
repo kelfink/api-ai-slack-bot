@@ -29,7 +29,6 @@ const controller = Botkit.slackbot({
 
 controller.setupWebserver(port, (err) => {
   if (err) {console.error(err); }
-  console.log('Hey d00d, webserver is on port $port...');
 });
 
 
@@ -49,6 +48,17 @@ function isDefined(obj) {
     return obj != null;
 }
 
+var pg = require('pg');
+ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+	client.query('SELECT * FROM test_table', function(err, result) {
+	  done();
+	  if (err)
+	   { console.error(err); response.send("Error " + err); }
+	  else
+	   { console.log('pages/db', {results: result.rows} ); }
+	});
+});
+  
 controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambient'], function (bot, message) {
 
     console.log(message.text);
