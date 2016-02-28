@@ -28,7 +28,7 @@ var lockResource = function (bot, message, params) {
 					    console.error(err);
 					    return;
 					  } else {
-					    if (result.row.length == 0) {
+					    if (result.rows.length == 0) {
 					      bot.reply(message, "I couldn't find resource " + params.resource_name);
 					     return;
 			            } else {
