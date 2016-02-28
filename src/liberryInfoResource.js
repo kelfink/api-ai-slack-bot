@@ -3,6 +3,8 @@
 // ============================
 
 var infoResource = function (bot, message, params) {
+	const utils = require('./utils.js');
+
 	var pg = require('pg');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 			client.query('SELECT * FROM resources where name = $1', [params.resource_name], function(err, result) {
@@ -19,7 +21,9 @@ var infoResource = function (bot, message, params) {
 				    if (!result.rows[0].checkedout_to_id) {
 				    bot.reply(message, "Resource " + params.resource_name + "  looks like it's available");
 				    } else {
-				        bot.reply(message, "Resource " + params.resource_name + " is locked by " + result.rows[0].checkedout_to_id);
+						utils.usersList( function(userMap) {
+						  bot.reply(message, "Resource " + params.resource_name + " is locked by " + userMap[result.rows[0].checkedout_to_id].name);
+							});
 				    }
 				  }
 				};
