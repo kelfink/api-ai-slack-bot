@@ -19,7 +19,7 @@ var createResource = function (bot, message, params) {
 			console.error(err);
 			return;
 		  } else {
-			bot.reply(message, messageResult);
+			bot.reply(message, 'Created resource ' + resource_name);
 			console.log('Results: ', {results: result.rows} ); 
 		  }
 		});
