@@ -57,7 +57,7 @@ var pg = require('pg');
 	client.query('CREATE TABLE IF NOT EXISTS resources (name varchar(250) PRIMARY KEY, checkedout_to_id varchar(250))', function(err, result) {
 	  done();
 	  if (err)
-	   { console.error(err); response.send("Error " + err); }
+	   { console.error(err);}
 	});
 });
   

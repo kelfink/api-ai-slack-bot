@@ -13,22 +13,18 @@
 var createResource = function (bot, message, params) {
 	var pg = require('pg');
 	 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-		client.query('SELECT * FROM resources where resource_name = ', function(err, result) {
+		client.query('SELECT * FROM resources where name = $1', [params.resource_name], function(err, result) {
 		  done();
 		  if (err) {
-			console.error(err); response.send("Error " + err);
+			console.error(err);
 			return;
 		  } else {
-		   console.log('pages/db', {results: result.rows} ); 
+			bot.reply(message, messageResult);
+			console.log('Results: ', {results: result.rows} ); 
 		  }
 		});
 	});
 
-
-//	  console.log(messageResult);
-
-	  var messageResult = "Created resource " + params.resource_name;
-	  bot.reply(message, messageResult);
 }
 
 module.exports = {
