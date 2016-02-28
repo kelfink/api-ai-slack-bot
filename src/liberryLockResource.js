@@ -1,14 +1,6 @@
 // ============================
 // Lock  Resource for liberry
 // ============================
-// var parseUsers = function(jsonBody) {
-    // var users = {};
-	// var userlistResponse = JSON.parse(jsonBody);
-	// userlistResponse.members.forEach(function(member) {
-	  // users[member.id] = member;
-	// });
-    // return users;
-//}
 
 var lockResource = function (bot, message, params) {
 	var pg = require('pg');
@@ -32,12 +24,14 @@ var lockResource = function (bot, message, params) {
 					      bot.reply(message, "I couldn't find resource " + params.resource_name);
 					     return;
 			            } else {
-				          bot.reply(message, "Resource " + params.resource_name + " is already locked by " + result.rows[0].checkedout_to_id);
+					        utils.usersList( function(userMap) {
+								bot.reply(message, "Resource " + params.resource_name + " is already checked out by " + userMap[result.rows[0].checkedout_to_id].name);
+							});
 			            }
 					  }
 					});	
 				  } else {
-					bot.reply(message, "Resource " + params.resource_name + " is checked out to you, " + message.user );
+					bot.reply(message, "Resource " + params.resource_name + " is already checked out to you, " + message.user );
 				  }
 				}
               }

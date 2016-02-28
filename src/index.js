@@ -72,10 +72,6 @@ controller.hears(['realname'],'direct_message,direct_mention,mention',function(b
              bot.reply(message, 'Oh, you are actually ' + userMap[message.user].name);
            }
         );
-        //console.log("userMap length " + userMap.length());
-
-		//bot.reply(message,'Slackbot is:' + userMap['USLACKBOT']);
-		//bot.reply(message,'Oh, you are actually ' + userMap[message.user]);
 });
 
 controller.hears(['userlist'],'direct_message,direct_mention,mention',function(bot, message) {
