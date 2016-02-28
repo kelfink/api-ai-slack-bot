@@ -140,7 +140,7 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                        if (isDefined(action)) {
                             switch (action) {
 								case "create_resource":
-								  libCreateResource.createResource (params);
+								  libCreateResource.createResource (bot, params);
                                   break;
 								case "checkout_resource":
                                   bot.reply(message, "meh-handled action " + action + " and create " + params.toString());

@@ -10,7 +10,7 @@
     // return users;
 //}
 
-var createResource = function (params) {
+var createResource = function (bot, params) {
 	  var messageResult = "Created resource " + params.resource_name;
 	  console.log(messageResult);
 	  bot.reply(message, messageResult);
