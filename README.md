@@ -1,4 +1,4 @@
-﻿# Api.ai Slack Integration - Now with Meat!
+﻿# Liberry.club -- resource sharing made friendly
 
 ## Overview
 
