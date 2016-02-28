@@ -140,7 +140,7 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                        if (isDefined(action)) {
                             switch (action) {
 								case "create_resource":
-								  libCreateResource.createResource (bot, params);
+								  libCreateResource.createResource (bot, message, params);
                                   break;
 								case "checkout_resource":
                                   bot.reply(message, "meh-handled action " + action + " and create " + params.toString());
@@ -150,6 +150,7 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                                   break;
                                 case "input_unknown":
                                   bot.reply(message, "I don't know what that is");
+								  break;
                                 default :
                                   bot.reply(message, "unhandled action " + action);
                             }
