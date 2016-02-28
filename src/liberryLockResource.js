@@ -32,7 +32,7 @@ var lockResource = function (bot, message, params) {
 					      bot.reply(message, "I couldn't find resource " + params.resource_name);
 					     return;
 			            } else {
-				          bot.reply(message, "Resource " + params.resource_name + " is already locked by " result.rows[0].checkedout_to_id);
+				          bot.reply(message, "Resource " + params.resource_name + " is already locked by " + result.rows[0].checkedout_to_id);
 			            }
 					  }
 					});	
