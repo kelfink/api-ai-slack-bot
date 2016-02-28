@@ -16,8 +16,8 @@ var infoResource = function (bot, message, params) {
 				    bot.reply(message, "I couldn't find resource " + params.resource_name);
 				    return;
 				  } else {
-				    if (message.user === nulL) {
-				    bot.reply(message, "Resource " + params.resource_name + "  looks like available");
+				    if (!message.user) {
+				    bot.reply(message, "Resource " + params.resource_name + "  looks like it's available");
 				    } else {
 				        bot.reply(message, "Resource " + params.resource_name + " is locked by " + result.rows[0].checkedout_to_id);
 				    }
