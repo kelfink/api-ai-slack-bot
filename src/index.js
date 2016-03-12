@@ -31,7 +31,7 @@ var sessionIds = {};
 const port = process.env.PORT || 3000;
 
 const controller = Botkit.slackbot({
-    debug: false
+    debug: true
     //include "log: false" to disable logging
 });
 
