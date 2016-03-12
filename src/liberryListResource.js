@@ -14,7 +14,8 @@ var listResource = function (bot, message, params) {
 				  console.error(err);
 				  return;
 				} else {
-				  if (result.rows.length == 0) {
+                  rows = result.rows
+				  if (rows.length == 0) {
 				    bot.reply(message, "I couldn't find any resources yet.  Try creating one.");
 				    return;
 				  } else {
@@ -23,7 +24,7 @@ var listResource = function (bot, message, params) {
                       var row = rows[i];
                       reply_text += "\t" + row.resource_name
                       if (row.checkedout_to_id) {
-                        reply_text += " is locked by " + userMap[result.rows[0].checkedout_to_id].name;
+                        reply_text += " is locked by " + userMap[rows.checkedout_to_id].name;
                       }
                     }
                     bot.reply(message, reply_text);
