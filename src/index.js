@@ -19,6 +19,7 @@ const libCreateResource = require('./liberryCreateResource.js');
 const libLockResource = require('./liberryLockResource.js');
 const libUnlockResource = require('./liberryUnlockResource.js');
 const libInfoResource = require('./liberryInfoResource.js');
+const libListResource = require('./liberryListResource.js');
 
 const Entities = require('html-entities').XmlEntities;
 const decoder = new Entities();
@@ -148,8 +149,17 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
 								case "info_resource":
 								  libInfoResource.infoResource (bot, message, params);
                                   break;
-                                case "input_unknown":
-                                  bot.reply(message, "I don't know what that is");
+								case "list_resources":
+								  libListResource.listResource (bot, message, params);
+                                  break;
+                                case "input.unknown":
+                                  bot.reply(message, "I don't know what you said, there.")
+								  break;
+                                case "delete_resource":
+                                  bot.reply(message, "Oh, sorry.  I don't handle resource deletion yet."
+								  break;
+                                case "help":
+                                  bot.reply(message, "Hi, I can handle requests for create_resource, checkout_resource, checkin_resource, info_resource, list_resources, delete_resource, help "
 								  break;
                                 default :
                                   bot.reply(message, "unhandled action " + action);
