@@ -34,5 +34,5 @@ var listResource = function (bot, message, params) {
 }
 
 module.exports = {
-  infoResource: infoResource
+  listResource: listResource
 }
