@@ -159,7 +159,7 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                                   bot.reply(message, "Oh, sorry.  I don't handle resource deletion yet.");
 								  break;
                                 case "help":
-                                  bot.reply(message, "Hi, I can handle requests for create_resource, checkout_resource, checkin_resource, info_resource, list_resources, delete_resource, help "
+                                  bot.reply(message, "Hi, I can handle requests for create_resource, checkout_resource, checkin_resource, info_resource, list_resources, delete_resource, help ");
 								  break;
                                 default :
                                   bot.reply(message, "unhandled action " + action);
