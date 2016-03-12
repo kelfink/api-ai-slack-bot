@@ -19,16 +19,18 @@ var listResource = function (bot, message, params) {
 				    bot.reply(message, "I couldn't find any resources yet.  Try creating one.");
 				    return;
 				  } else {
-                    reply_text = "Resources:\n";
-                    for (var i = 0, len = rows.length; i < len; i++) {
-                      var row = rows[i];
-                      reply_text += "\t" + row.resource_name
-                      if (row.checkedout_to_id) {
-                        reply_text += " is locked by " + userMap[rows.checkedout_to_id].name;
-                      }
-                    }
-                    bot.reply(message, reply_text);
-				  }
+					utils.usersList( function(userMap) {
+					  reply_text = "Resources:\n";
+					  for (var i = 0, len = rows.length; i < len; i++) {
+					    var row = rows[i];
+					    reply_text += "\t" + row.resource_name
+					    if (row.checkedout_to_id) {
+                          reply_text += " is locked by " + userMap[rows.checkedout_to_id].name;
+					    }
+					    bot.reply(message, reply_text);
+				      }
+				    });
+                  }
 				};
 		});
 	});
