@@ -4,7 +4,7 @@
 
 var listResource = function (bot, message, params) {
 	const utils = require('./utils.js');
-    time = requie('time')(Date);
+    time = require('time')(Date);
 
     var resultArray = [];
 
