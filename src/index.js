@@ -73,7 +73,8 @@ function replyUserName(userMap, message) {
 controller.hears(['realname'],'direct_message,direct_mention,mention',function(bot, message) {
 		bot.reply(message,'Your id is "' + message.user + '"');
         utils.usersList( function(userMap) {
-             bot.reply(message, 'Oh, you are actually ' + userMap[message.user].name);
+             bot.reply(message, 'Oh, you are actually ' + userMap[message.user].name
+                 + " your tz is " + userMap[message.user].tz_label);
            }
         );
 });
