@@ -34,7 +34,7 @@ var lockResource = function (bot, message, params) {
 					});	
 				  } else {
 					utils.usersList( function(userMap) {
-						bot.reply(message, "Resource " + params.resource_name + " is now checked out to you, " + userMap[message.user].name);
+						bot.reply(message, "Resource " + params.resource_name + " is now checked out to you, @" + userMap[message.user].name);
 					});
 				  }
 				}

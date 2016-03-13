@@ -16,6 +16,7 @@ const argv = require('minimist')(process.argv.slice(2));
 const utils = require('./utils.js');
 
 const libCreateResource = require('./liberryCreateResource.js');
+const libDeleteResource = require('./liberryDeleteResource.js');
 const libLockResource = require('./liberryLockResource.js');
 const libUnlockResource = require('./liberryUnlockResource.js');
 const libInfoResource = require('./liberryInfoResource.js');

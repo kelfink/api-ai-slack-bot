@@ -23,15 +23,16 @@ var listResource = function (bot, message, params) {
         var reply = "Resource list:"
 		utils.usersList( function(userMap) {
           for (var i = 0; i < result.rows.length; i++) {
-            reply += "\n\t" + result.rows[i].name ;
+            row = result.rows[i];
+            reply += "\n\t" + row.name ;
             if (result.rows[i].checkedout_to_id) {
-			  user = userMap[result.rows[i].checkedout_to_id]
+			  user = userMap[row.checkedout_to_id]
               if (!user) {
-                  user = result.rows[i].checkedout_to_id;
+                  user = row.checkedout_to_id;
               } else {
                user = "@" + user.name;
               };
-			  reply += " checked out to " +  user;
+			  reply += " checked out to " +  user + " since " + row.locked_since;
             }
           }
 	      bot.reply(message,  reply);
