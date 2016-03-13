@@ -34,7 +34,8 @@ var listResource = function (bot, message, params) {
                 user = "@" + user.name;
               };
               timezone = message.user.tz_label
-              console.log(timezone);
+              console.log("YOUR TIMEZONE IS " + message.user.tz_offset);
+              console.log("YOUR TIMEZONE IS " + timezone);
               locked_since = row.locked_since;
               locked_since.setTimezone(timezone);
 			  reply += " checked out to " +  user + " since " + locked_since;
