@@ -35,9 +35,9 @@ var listResource = function (bot, message, params) {
               };
               timezone = userMap[message.user].tz_label
               console.log("YOUR TIMEZONE IS " + userMap[message.user].tz_offset);
-              console.log("YOUR TIMEZONE IS " + userMap[message.user].timezone);
+              console.log("YOUR TIMEZONE IS " + userMap[message.user].tz_label);
               locked_since = row.locked_since;
-              locked_since.setTimezone(timezone);
+              locked_since.setSeconds(locked_since.getSeconds() + userMap[message.user].tz_offset);
 			  reply += " checked out to " +  user + " since " + locked_since;
             }
           }
