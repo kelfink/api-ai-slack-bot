@@ -7,7 +7,7 @@ var lockResource = function (bot, message, params) {
 
 	var pg = require('pg');
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-			client.query("UPDATE resources set checkedout_to_id = $2 where checkedout_to_id IS NULL AND name = $1", [params.resource_name, message.user], function(err, result) {
+			client.query("UPDATE resources set locked_since = localtimestamp, checkedout_to_id = $2 where checkedout_to_id IS NULL AND name = $1", [params.resource_name, message.user], function(err, result) {
 				done();
 				if (err) {
 				  console.error(err);
@@ -27,7 +27,7 @@ var lockResource = function (bot, message, params) {
 					     return;
 			            } else {
 					        utils.usersList( function(userMap) {
-								bot.reply(message, "Resource " + params.resource_name + " is already checked out by " + userMap[result.rows[0].checkedout_to_id].name);
+								bot.reply(message, "Resource " + params.resource_name + " is already checked out by " + userMap[result.rows[0].checkedout_to_id].name + " as of " + result.rows[0].locked_since);
 							});
 						}
 					  }

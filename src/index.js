@@ -58,7 +58,7 @@ function isDefined(obj) {
 
 var pg = require('pg');
  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-	client.query('CREATE TABLE IF NOT EXISTS resources (name varchar(250) PRIMARY KEY, checkedout_to_id varchar(250))', function(err, result) {
+	client.query('CREATE TABLE IF NOT EXISTS resources (name varchar(250) PRIMARY KEY, checkedout_to_id varchar(250), locked_since timestamp)', function(err, result) {
 	  done();
 	  if (err)
 	   { console.error(err);}
@@ -137,6 +137,9 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
                      else {
                        if (isDefined(action)) {
                             switch (action) {
+								case "list_resources":
+								  libListResource.listResource (bot, message, params);
+                                  break;
 								case "create_resource":
 								  libCreateResource.createResource (bot, message, params);
                                   break;
@@ -149,17 +152,14 @@ controller.hears(['.*'], ['direct_message', 'direct_mention', 'mention', 'ambien
 								case "info_resource":
 								  libInfoResource.infoResource (bot, message, params);
                                   break;
-								case "list_resources":
-								  libListResource.listResource (bot, message, params);
-                                  break;
-                                case "input.unknown":
-                                  bot.reply(message, "I don't know what you said, there.")
-								  break;
                                 case "delete_resource":
-                                  bot.reply(message, "Oh, sorry.  I don't handle resource deletion yet.");
+                                  libDeleteResource.deleteResource (bot, message, params);
 								  break;
                                 case "help":
                                   bot.reply(message, "Hi, I can handle requests for create_resource, checkout_resource, checkin_resource, info_resource, list_resources, delete_resource, help ");
+								  break;
+                                case "input.unknown":
+                                  bot.reply(message, "I don't know what you said, there.")
 								  break;
                                 default :
                                   bot.reply(message, "unhandled action " + action);

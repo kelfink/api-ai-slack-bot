@@ -29,7 +29,7 @@ var listResource = function (bot, message, params) {
               if (!user) {
                   user = result.rows[i].checkedout_to_id;
               } else {
-               user = user.name;
+               user = "@" + user.name;
               };
 			  reply += " checked out to " +  user;
             }

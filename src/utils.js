@@ -21,7 +21,7 @@ var usersList = function (action) {
 			} else {
 			  console.log("Got an error: ", error, ", status code: ", response.statusCode);
 			}
-			});
+	});
 }
 
 module.exports = {

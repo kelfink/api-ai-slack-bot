@@ -18,11 +18,12 @@ var infoResource = function (bot, message, params) {
 				    bot.reply(message, "I couldn't find resource " + params.resource_name);
 				    return;
 				  } else {
-				    if (!result.rows[0].checkedout_to_id) {
+                    row = result.rows[0];
+				    if (!row.checkedout_to_id) {
 				    bot.reply(message, "Resource " + params.resource_name + "  looks like it's available");
 				    } else {
 						utils.usersList( function(userMap) {
-						  bot.reply(message, "Resource " + params.resource_name + " is locked by " + userMap[result.rows[0].checkedout_to_id].name);
+						  bot.reply(message, "Resource " + params.resource_name + " has locked by @" + userMap[row.checkedout_to_id].name) + " since " + row.locked_since;
 							});
 				    }
 				  }
