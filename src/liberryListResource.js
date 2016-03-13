@@ -4,6 +4,7 @@
 
 var listResource = function (bot, message, params) {
 	const utils = require('./utils.js');
+    time = requie('time')(Date);
 
     var resultArray = [];
 
@@ -28,11 +29,15 @@ var listResource = function (bot, message, params) {
             if (result.rows[i].checkedout_to_id) {
 			  user = userMap[row.checkedout_to_id]
               if (!user) {
-                  user = row.checkedout_to_id;
+                user = row.checkedout_to_id;
               } else {
-               user = "@" + user.name;
+                user = "@" + user.name;
               };
-			  reply += " checked out to " +  user + " since " + row.locked_since;
+              timezone = message.user.tz_label
+              console.log(timezone);
+              locked_since = row.locked_since;
+              locked_since.setTimezone(timezone);
+			  reply += " checked out to " +  user + " since " + locked_since;
             }
           }
 	      bot.reply(message,  reply);
