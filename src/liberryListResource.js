@@ -21,12 +21,14 @@ var listResource = function (bot, message, params) {
         done();
         console.log(result.rows.length + ' rows were received');
         var reply = "Resource list:"
-        for (var i = 0; i < result.rows.length; i++) {
-          reply += "\n" + result.rows[i].name ;
-          if (result.rows[i].checkedout_to_id) {
-            reply += "   checked out to " +  result.rows[i].checkedout_to_id;
+		utils.usersList( function(userMap) {
+          for (var i = 0; i < result.rows.length; i++) {
+            reply += "\n\t" + result.rows[i].name ;
+            if (result.rows[i].checkedout_to_id) {
+			  reply += " checked out to " + userMap[result.rows[i].checkedout_to_id].name;
+            }
           }
-        }
+        });
 	    bot.reply(message,  reply);
       });
     });
