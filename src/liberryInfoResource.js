@@ -23,11 +23,11 @@ var infoResource = function (bot, message, params) {
 				    bot.reply(message, "Resource " + params.resource_name + "  looks like it's available");
 				    } else {
 						utils.usersList( function(userMap) {
-						  bot.reply(message, "Resource " + params.resource_name + " has locked by @" + userMap[row.checkedout_to_id].name) + " since " + row.locked_since;
+						  bot.reply(message, "Resource " + params.resource_name + " has been locked by @" + userMap[row.checkedout_to_id].name) + " since " + row.locked_since;
 							});
 				    }
 				  }
-				};
+			};
 		});
 	});
 }
