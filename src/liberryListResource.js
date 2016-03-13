@@ -20,7 +20,14 @@ var listResource = function (bot, message, params) {
       query.on('end', function(result) {
         done();
         console.log(result.rows.length + ' rows were received');
-	    bot.reply(message, "resources: " + result.rows.length + ". first is " + results.rows[0].name);
+        var reply = "Resource list:"
+        for (var i = 0; i < result.rows.length; i++) {
+          reply += "\n" + result.rows[i].name ;
+          if (result.rows[i].checkedout_to_id) {
+            reply += "   checked out to " +  result.rows[i].checkedout_to_id;
+          }
+        }
+	    bot.reply(message,  reply);
       });
     });
 };
