@@ -25,7 +25,13 @@ var listResource = function (bot, message, params) {
           for (var i = 0; i < result.rows.length; i++) {
             reply += "\n\t" + result.rows[i].name ;
             if (result.rows[i].checkedout_to_id) {
-			  reply += " checked out to " +  userMap[result.rows[i].checkedout_to_id];
+			  user = userMap[result.rows[i].checkedout_to_id]
+              if (!user) {
+                  user = result.rows[i].checkedout_to_id;
+              } else {
+               user = user.name;
+              };
+			  reply += " checked out to " +  user;
             }
           }
 	      bot.reply(message,  reply);
